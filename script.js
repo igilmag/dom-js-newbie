@@ -1,4 +1,7 @@
+/* eslint-disable no-useless-return */
 'use strict'
+
+import { classListEdit } from './functions.js'
 
 // Al cargar la página
 document.querySelector('#innerHTML').innerHTML = '<strong>Xurxo González</strong>'
@@ -17,6 +20,14 @@ function escribirMensaje (mensaje) {
   btn.value = mensaje
 }
 
+const pegarTexto = (textoAPegar) => {
+  document.querySelector('#destino').textContent += textoAPegar
+}
+
+function visibilidadInfo (display) {
+  document.querySelector('.oculto').style.display = display
+}
+
 // Eventos
 
 const btn = document.querySelector('#click-dblclick')
@@ -33,3 +44,27 @@ document.querySelector('#click-dblclick').addEventListener(
     event.target.value = 'Hice dos clicks'
   }
 )
+
+document.getElementById('copiar').addEventListener('click', () => {
+  const origenEL = document.querySelector('.origen')
+  // Validamos que haya texto copiar
+  if (origenEL.value.trim().length < 1 || origenEL.value.trim() === '') return
+
+  pegarTexto(origenEL.value)
+})
+
+document.querySelector('#cdn').addEventListener('click', () => {
+  visibilidadInfo('block')
+})
+
+document.querySelector('.cerrar').addEventListener('click', () => {
+  visibilidadInfo('none')
+})
+
+document.querySelector('#addClass').addEventListener('click', () => {
+  classListEdit(true)
+})
+
+document.querySelector('#removeClass').addEventListener('click', function () {
+  classListEdit(false)
+})
